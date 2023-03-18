@@ -73,10 +73,10 @@ public class HAMURABI {
 		temp = (int) (Math.random() * 5 + 1);
 		if (temp % 2 != 1)
 			eaten = (stores / temp);
-		else 
+		else
 			eaten = 0;
 		stores += (harvest - eaten);
-		immigrants = (int) (Math.random() * 5 + 1) * 
+		immigrants = (int) (Math.random() * 5 + 1) *
 					(20 * acres + stores) / population / 100 + 1;
 		if (population > fullPeople) {
 			deaths = population - fullPeople;
@@ -90,7 +90,7 @@ public class HAMURABI {
 			plague = true;
 		plague = false;
 	}
-	
+
 	private static String report() {
 		String answer = "\nHAMURABI:  I BEG TO REPORT TO YOU,\n" +
 				"IN YEAR " + year + ", " + deaths + " PEOPLE STARVED, " + immigrants + " CAME TO THE CITY.\n";
@@ -107,7 +107,7 @@ public class HAMURABI {
 		return answer;
 	}
 
-	
+
 	private static void epicFail(int x) {
 		String reason = "";
 		switch (x) {
@@ -119,7 +119,7 @@ public class HAMURABI {
 		System.out.println(reason);
 		System.exit(0);
 	}
-	
+
 	private void finished() {
 		String answer = "IN YOUR 10-YEAR TERM OF OFFICE, " + percentDied + " PERCENT OF THE\n" +
 			"POPULATION STARVED PER YEAR ON AVERAGE, I.E., A TOTAL OF\n" +
@@ -144,7 +144,7 @@ public class HAMURABI {
 		answer += "\n\n\n\n\n\n\n\n\n\nSo long for now.";
 		System.out.println(answer);
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		HAMURABI a = new HAMURABI();
 		System.out.println("\t\t\t\tHAMURABI\n\t       CREATIVE COMPUTING MORRISTOWN, NEW JERSEY\n\n" +
