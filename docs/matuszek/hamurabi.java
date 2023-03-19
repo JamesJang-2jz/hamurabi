@@ -15,8 +15,8 @@
 	final static String FINK = "DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY\n" +
 		"BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE\n" +
 		"ALSO BEEN DECLARED PERSONA NON GRATA!!\n";
-//	Scanner input = new Scanner(System.in);
-//
+	Scanner input = new Scanner(System.in);
+
 //	private void newYear() {
 //		year += 1;
 //		population += immigrants;
@@ -43,17 +43,17 @@
 //		} while (temp > acres);
 //		stores += temp * landPrice;
 //		acres -= temp;
-//		do {
-//			System.out.print("\nHOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE?  ");
-//			temp = input.nextInt();
-//			if (temp < 0)
-//				epicFail(0);
-//			if (temp > stores)
-//				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
-//						stores + " BUSHELS OF GRAIN. NOW THEN,");
-//		} while (temp > stores);
-//		fullPeople = temp / 20;
-//		stores -= temp;
+		do {
+			System.out.print("\nHOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE?  ");
+			temp = input.nextInt();
+			if (temp < 0)
+				epicFail(0);
+			if (temp > stores)
+				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
+						stores + " BUSHELS OF GRAIN. NOW THEN,");
+		} while (temp > stores);
+		fullPeople = temp / 20;
+		stores -= temp;
 		do {
 			System.out.print("\nHOW MANY ACRES DO YOU WISH TO PLANT WITH SEED?  ");
 			temp = input.nextInt();
