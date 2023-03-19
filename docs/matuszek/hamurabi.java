@@ -1,59 +1,59 @@
-import java.io.IOException;
-import java.util.Scanner;
-
-// this seems to be an example of a solution that mimics the original BASIC code the author was writing from.
+//import java.io.IOException;
+//import java.util.Scanner;
 //
-// it's a great example of Very Bad Java.
-// Do not write Java like this. If you do, do NOT tell people you went to Zip Code.
-// I'm serious.
-// (how the hell would you ever be able to TEST this piece of code?)
-//
-public class HAMURABI {
+//// this seems to be an example of a solution that mimics the original BASIC code the author was writing from.
+////
+//// it's a great example of Very Bad Java.
+//// Do not write Java like this. If you do, do NOT tell people you went to Zip Code.
+//// I'm serious.
+//// (how the hell would you ever be able to TEST this piece of code?)
+////
+//public class HAMURABI {
 	static int totalDeaths = 0, percentDied = 0, year = 0, population = 95, stores = 2800, immigrants = 5, deaths,
 		harvest = 3000, yeild = 3, acres = harvest / yeild, eaten = harvest - stores, landPrice, fullPeople, temp;
 	static boolean plague = false;
 	final static String FINK = "DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY\n" +
 		"BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE\n" +
 		"ALSO BEEN DECLARED PERSONA NON GRATA!!\n";
-	Scanner input = new Scanner(System.in);
-
-	private void newYear() {
-		year += 1;
-		population += immigrants;
-		landPrice = (int) (10 * Math.random() + 17);
-		System.out.println(report());
-		do {
-			System.out.print("HOW MANY ACRES DO YOU WISH TO BUY?  ");
-			temp = input.nextInt();
-			if (temp < 0)
-				epicFail(0);
-			if (temp * landPrice > stores)
-				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
-						stores + " BUSHELS OF GRAIN. NOW THEN,");
-		} while (temp * landPrice > stores);
-		acres += temp;
-		stores -= temp * landPrice;
-		do {
-			System.out.print("HOW MANY ACRES DO YOU WISH TO SELL?  ");
-			temp = input.nextInt();
-			if (temp < 0)
-				epicFail(0);
-			if (temp > acres)
-				System.out.println("HAMURABI:  THINK AGAIN. YOU OWN ONLY " + acres + " ACRES. NOW THEN,");
-		} while (temp > acres);
-		stores += temp * landPrice;
-		acres -= temp;
-		do {
-			System.out.print("\nHOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE?  ");
-			temp = input.nextInt();
-			if (temp < 0)
-				epicFail(0);
-			if (temp > stores)
-				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
-						stores + " BUSHELS OF GRAIN. NOW THEN,");
-		} while (temp > stores);
-		fullPeople = temp / 20;
-		stores -= temp;
+//	Scanner input = new Scanner(System.in);
+//
+//	private void newYear() {
+//		year += 1;
+//		population += immigrants;
+//		landPrice = (int) (10 * Math.random() + 17);
+//		System.out.println(report());
+//		do {
+//			System.out.print("HOW MANY ACRES DO YOU WISH TO BUY?  ");
+//			temp = input.nextInt();
+//			if (temp < 0)
+//				epicFail(0);
+//			if (temp * landPrice > stores)
+//				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
+//						stores + " BUSHELS OF GRAIN. NOW THEN,");
+//		} while (temp * landPrice > stores);
+//		acres += temp;
+//		stores -= temp * landPrice;
+//		do {
+//			System.out.print("HOW MANY ACRES DO YOU WISH TO SELL?  ");
+//			temp = input.nextInt();
+//			if (temp < 0)
+//				epicFail(0);
+//			if (temp > acres)
+//				System.out.println("HAMURABI:  THINK AGAIN. YOU OWN ONLY " + acres + " ACRES. NOW THEN,");
+//		} while (temp > acres);
+//		stores += temp * landPrice;
+//		acres -= temp;
+//		do {
+//			System.out.print("\nHOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE?  ");
+//			temp = input.nextInt();
+//			if (temp < 0)
+//				epicFail(0);
+//			if (temp > stores)
+//				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
+//						stores + " BUSHELS OF GRAIN. NOW THEN,");
+//		} while (temp > stores);
+//		fullPeople = temp / 20;
+//		stores -= temp;
 		do {
 			System.out.print("\nHOW MANY ACRES DO YOU WISH TO PLANT WITH SEED?  ");
 			temp = input.nextInt();

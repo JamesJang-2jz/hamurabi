@@ -84,7 +84,11 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         } return input;
     }
     public int askHowManyAcresToPlant(int acresLand, int population, int bushels) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n ");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Senpai! how many acres do you wish to sow with seed?" +
+                "Current inventory: " + acresLand + "");
+        int input = scanner.nextInt();
+        if (input)
+        return input;
     }
 
 
