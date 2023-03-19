@@ -51,8 +51,10 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                 peopleNew = 0;
             }
             bushelHarvest = harvest(acresToPlant);
-
+            landPrice = newCostOfLand();
+            printSummary();
         }
+        finalSumary();
     }
     int getNumber(String message) {
         while (true) {
@@ -84,8 +86,10 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                 System.out.println("Being cheeky are we? You only have " + bushels + " bushels");
             } else if (input < 0) {
                 System.out.println("Bloody hell, No negative numbers!");
+            } else if (input == 0){
+                return input;
             }
-        } while (input * landPrice > bushelWheat || input == 0);
+        } while (input * landPrice > bushelWheat);
 //        acresLand += input;
 //        bushelWheat -= input * landPrice;
         return input;
@@ -160,14 +164,21 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         return (rand.nextInt(6) + 1) * acresPlanted;
     }
     public int grainEatenByRats(int bushels){
-        int eaten = (int) ((double)(rand.nextInt(20) + 10)/ 100) * bushels;
+        int eaten = (int) (bushels * (double) (rand.nextInt(20) + 10)/100);
         if (rand.nextInt(100) < 40) {
             return eaten;
         }
         return 0;
     }
-//    public int newCostOfLand(){
-//
-//    }
+    public int newCostOfLand(){
+        return rand.nextInt(7) + 17;
+    }
+
+    public int printSummary() {
+
+    }
+    public int finalSumary(){
+
+    }
 
 }
