@@ -87,10 +87,11 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                 landPrice + " bushels per acre. \n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
     public int askHowManyAcresToBuy(int price, int bushels) {
-        int input = getNumber("Greetings Harambe, how many acres of land are we buying? \n" +
-                "Cost of land " + price + ". Current inventory " + bushels + "\n" +
-                "Enter: 0 to skip");
+        int input;
+        System.out.println("Greetings Harambe, how many acres of land will you buy?");
         do {
+            input = getNumber("Cost of land " + price + ". Current inventory " + bushels + "\n" +
+                    "Enter: 0 to skip");
             if (input * landPrice > bushelWheat) {
                 System.out.println("Being cheeky are we? You only have " + bushels + " bushels");
             } else if (input < 0) {
@@ -102,9 +103,10 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         return input;
     }
     public int askHowManyAcresToSell(int acresOwned) {
-        int input = getNumber("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHow many acres would you like to sell over yonder? \n" +
-                "Cost of land " + landPrice + ". Current inventory " + acresOwned);
+        int input;
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHow many acres would you like to sell over yonder?");
         do {
+            input = getNumber("Cost of land " + landPrice + ". Current inventory " + acresOwned);
             if (input > acresOwned) {
                 System.out.println("Sire, you are broke. You only possess " + acresLand + " acres.");
             } else if (input < 0) {
