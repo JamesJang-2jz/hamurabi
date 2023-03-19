@@ -4,36 +4,37 @@ import java.util.Scanner;
 public class Hammurabi {         // must save in a file named Hammurabi.java
     Random rand = new Random();  // this is an instance variable
     Scanner scanner = new Scanner(System.in);
-    int year, people = 95;
-    int peopleStarved, peopleNew;
-    int bushelWheat, acresLand, landPrice;
-    int bushelHarvest, bushelDestroyed, cityLand, bushelPerAcre;
+    int year = 0;
+    int people = 95;
+    int peopleStarved = 0;
+    int peopleFull = 0;
+    int peopleNew = 5;
+    int bushelWheat;
+    int acresLand = 1000;
+    int landPrice = 19;
+    int bushelHarvest = 3000;
+    int bushelDestroyed = 200;
+    int cityLand = 1000;
+    int bushelPerAcre = 3;
     public static void main(String[] args) {
         new Hammurabi().playGame();
     }
     void playGame() {
-        peopleNew = 5;
         people += peopleNew;
-        year = 0;
-        peopleStarved = 0;
-        bushelHarvest = 3000;
-        bushelDestroyed = 200;
         bushelWheat = bushelHarvest - bushelDestroyed;
-        acresLand = 1000;
-        landPrice = 19;
-        cityLand = 1000;
-        bushelPerAcre = 3;
         while (year < 10) {
             year++;
             Intro();
             int acresToBuy = askHowManyAcresToBuy(landPrice, bushelWheat);
             if (acresToBuy == 0) {
-                askHowManyAcresToSell(acresLand);
+                int acresToSell = askHowManyAcresToSell(acresLand);
             }
-            
+            int howMuchToFeed = askHowMuchGrainToFeedPeople(bushelWheat);
+
         }
     }
     public void Intro() {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Senpai Settler! \nYou are in year " + year + " of your 10 year rule");
         System.out.println("In the past year " + peopleStarved + " people got hangry & left\n"
                 + "In the past year " + peopleNew + " people came to build houses & roads to settle\n"
@@ -70,7 +71,21 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         }
         return input;
     }
-
+    public int askHowMuchGrainToFeedPeople(int bushels) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Ciao! How much grain do you want to feed your people?" +
+                "Current inventory: " + bushels + ". Population: " + people);
+        int input = scanner.nextInt();
+        if (input > bushelWheat) {
+            System.out.println("Thou not have enough bushels!");
+            askHowMuchGrainToFeedPeople(bushelWheat);
+        } else if (input < bushelWheat) {
+            bushelWheat -= input;
+            peopleFull = input/20;
+        } return input;
+    }
+    public int askHowManyAcresToPlant(int acresLand, int population, int bushels) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n ");
+    }
 
 
 }
