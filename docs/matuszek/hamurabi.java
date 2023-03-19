@@ -90,7 +90,6 @@
 			plague = true;
 		plague = false;
 	}
-
 	private static String report() {
 		String answer = "\nHAMURABI:  I BEG TO REPORT TO YOU,\n" +
 				"IN YEAR " + year + ", " + deaths + " PEOPLE STARVED, " + immigrants + " CAME TO THE CITY.\n";
@@ -106,8 +105,6 @@
 				"LAND IS TRADING AT " + landPrice + " BUSHELS PER ACRE.";
 		return answer;
 	}
-
-
 	private static void epicFail(int x) {
 		String reason = "";
 		switch (x) {

@@ -11,6 +11,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     int peopleStarved = 0;
     int peopleFull = 0;
     int peopleNew = 5;
+    int numPlagueDeaths;
     int bushelWheat;
     int acresLand = 1000;
     int landPrice = 19;
@@ -32,15 +33,23 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         acresLand = bushelHarvest / bushelPerAcre;
         while (year < 10) {
             year++;
+            plague = false;
+            ratInfestation = false;
             Intro();
             int acresToBuy = askHowManyAcresToBuy(landPrice, bushelWheat);
+            acresLand += acresToBuy;
+            bushelWheat -= acresToBuy * landPrice;
             if (acresToBuy == 0) {
                 int acresToSell = askHowManyAcresToSell(acresLand);
+                bushelWheat += acresToSell * landPrice;
+                acresLand -= acresToSell;
             }
             peopleFull = askHowMuchGrainToFeedPeople(bushelWheat);
             int acresToPlant = askHowManyAcresToPlant(acresLand, people, bushelWheat);
-            int numberPlagueDeaths = plagueDeaths(people);
+            numPlagueDeaths = plagueDeaths(people);
+            people -= numPlagueDeaths;
             int numberStarvationDeaths = starvationDeaths(people, peopleFull);
+            peopleStarved = numberStarvationDeaths;
             if (uprising(people, numberStarvationDeaths)) {
                 System.out.println("Senpai Settler, we banish you. Be Gone! RIP Harambe");
                 break;
@@ -90,23 +99,20 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                 return input;
             }
         } while (input * landPrice > bushelWheat);
-//        acresLand += input;
-//        bushelWheat -= input * landPrice;
         return input;
     }
     public int askHowManyAcresToSell(int acresOwned) {
-        int input = getNumber("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \nHow many acres would you like to sell over yonder? \n" +
-                "Cost of land " + landPrice + ". Current inventory " + acresLand);
+        int input = getNumber("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHow many acres would you like to sell over yonder? \n" +
+                "Cost of land " + landPrice + ". Current inventory " + acresOwned);
         do {
             if (input > acresOwned) {
                 System.out.println("Sire, you are broke. You only possess " + acresLand + " acres.");
-                askHowManyAcresToSell(acresOwned);
             } else if (input < 0) {
                 System.out.println("Bloody hell, No negative numbers!");
+            } else if (input == 0){
+                return input;
             }
         } while (input > acresOwned);
-        bushelWheat += input * landPrice;
-        acresLand -= input;
         return input;
     }
     public int askHowMuchGrainToFeedPeople(int bushels) {
@@ -125,7 +131,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     }
     public int askHowManyAcresToPlant(int acresLand, int population, int bushels) {
         int input = getNumber("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Senpai! how many acres do you wish to sow with seed?" +
-                "Current inventory: " + acresLand + "");
+                " Current inventory: " + acresLand + "");
         do {
             if (input > acresLand) {
                 System.out.println("You only have " + acresLand + " acres!");
@@ -145,6 +151,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         int deaths = 0;
         if (rand.nextInt(100) < 15) {
             deaths = population/2;
+            plague = true;
         } return deaths;
     }
     public int starvationDeaths(int population, int bushelsFedToPeople) {
@@ -174,10 +181,17 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         return rand.nextInt(7) + 17;
     }
 
-    public int printSummary() {
-
+    public void printSummary() {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "Senpai Settler Harambe, year " +
+                year + " in review:\n" + "People starved: " + peopleStarved +
+                "\nImmigrants to the city: " + peopleNew );
+                if (plague) {
+                    System.out.println("Plague has struck the land! Half the people died.\n" +
+                            "Number of deaths: " + numPlagueDeaths);
+                }
+        System.out.println("Number of people starved to death: " + peopleStarved + "\n");
     }
-    public int finalSumary(){
+    public void finalSumary(){
 
     }
 
