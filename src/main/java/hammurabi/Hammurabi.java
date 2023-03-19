@@ -1,7 +1,6 @@
 package hammurabi;
 import java.util.Random;
 import java.util.Scanner;
-
 public class Hammurabi {         // must save in a file named Hammurabi.java
     Random rand = new Random();  // this is an instance variable
     Scanner scanner = new Scanner(System.in);
@@ -9,11 +8,9 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     int peopleStarved, peopleNew;
     int bushelWheat, acresLand, landPrice;
     int bushelHarvest, bushelDestroyed, cityLand, bushelPerAcre;
-
     public static void main(String[] args) {
         new Hammurabi().playGame();
     }
-
     void playGame() {
         peopleNew = 5;
         people += peopleNew;
@@ -30,8 +27,10 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
             year++;
             Intro();
             int acresToBuy = askHowManyAcresToBuy(landPrice, bushelWheat);
-            int acresToSell = askHowManyAcresToSell(acresLand);
-
+            if (acresToBuy == 0) {
+                askHowManyAcresToSell(acresLand);
+            }
+            
         }
     }
     public void Intro() {
@@ -55,8 +54,6 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         } else if (input > 0) {
             acresLand += input;
             bushelWheat -= input * landPrice;
-        } else if (input == 0) {
-            askHowManyAcresToSell(acresLand);
         }
         return input;
     }
@@ -68,7 +65,8 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
             System.out.println("Sire, you are broke. You only possess " + acresLand + " acres.");
             askHowManyAcresToSell(acresOwned);
         } else if (input < acresOwned) {
-            
+            bushelWheat += input * landPrice;
+            acresLand -= input;
         }
         return input;
     }
