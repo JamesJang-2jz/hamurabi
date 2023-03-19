@@ -160,7 +160,11 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         return (rand.nextInt(6) + 1) * acresPlanted;
     }
     public int grainEatenByRats(int bushels){
-
+        int eaten = (int) ((double)(rand.nextInt(20) + 10)/ 100) * bushels;
+        if (rand.nextInt(100) < 40) {
+            return eaten;
+        }
+        return 0;
     }
 //    public int newCostOfLand(){
 //
