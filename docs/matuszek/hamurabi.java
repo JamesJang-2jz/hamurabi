@@ -43,18 +43,18 @@
 //		} while (temp > acres);
 //		stores += temp * landPrice;
 //		acres -= temp;
-		do {
-			System.out.print("\nHOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE?  ");
-			temp = input.nextInt();
-			if (temp < 0)
-				epicFail(0);
-			if (temp > stores)
-				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
-						stores + " BUSHELS OF GRAIN. NOW THEN,");
-		} while (temp > stores);
-		fullPeople = temp / 20;
-		stores -= temp;
-		do {
+//		do {
+//			System.out.print("\nHOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE?  ");
+//			temp = input.nextInt();
+//			if (temp < 0)
+//				epicFail(0);
+//			if (temp > stores)
+//				System.out.println("HAMURABI:  THINK AGAIN. YOU HAVE ONLY\n" +
+//						stores + " BUSHELS OF GRAIN. NOW THEN,");
+//		} while (temp > stores);
+//		fullPeople = temp / 20;
+//		stores -= temp;
+//		do {
 			System.out.print("\nHOW MANY ACRES DO YOU WISH TO PLANT WITH SEED?  ");
 			temp = input.nextInt();
 			if (temp < 0)

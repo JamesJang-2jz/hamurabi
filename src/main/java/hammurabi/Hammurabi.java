@@ -29,7 +29,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         people += peopleNew;
         bushelWheat = bushelHarvest - bushelDestroyed;
         landPrice = (int) (Math.random() * 10 + 17);
-        acresLand = bushelHarvest/bushelPerAcre;
+        acresLand = bushelHarvest / bushelPerAcre;
         while (year < 10) {
             year++;
             Intro();
@@ -37,8 +37,15 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
             if (acresToBuy == 0) {
                 int acresToSell = askHowManyAcresToSell(acresLand);
             }
-            int howMuchToFeed = askHowMuchGrainToFeedPeople(bushelWheat);
+            int peopleFed = askHowMuchGrainToFeedPeople(bushelWheat);
             int acresToPlant = askHowManyAcresToPlant(acresLand, people, bushelWheat);
+            int numberPlagueDeaths = plagueDeaths(people);
+            int numberStarvationDeaths = starvationDeaths(people, peopleFed);
+            if (uprising(people, numberStarvationDeaths)) {
+                System.out.println("Senpai Settler, we banish you. Be Gone!");
+                break;
+            }
+
         }
     }
     int getNumber(String message) {
@@ -103,13 +110,13 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                 System.out.println("Please don't be so negative");
         } while (input > bushels);
         bushelWheat -= input;
-        peopleFull = input/ 20;
+//        peopleFull = input / 20;
         return input;
     }
     public int askHowManyAcresToPlant(int acresLand, int population, int bushels) {
+        int input = getNumber("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Senpai! how many acres do you wish to sow with seed?" +
+                "Current inventory: " + acresLand + "");
         do {
-            int input = getNumber("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Senpai! how many acres do you wish to sow with seed?" +
-                    "Current inventory: " + acresLand + "");
             if (input > acresLand) {
                 System.out.println("You only have " + acresLand + " acres!");
             } else if (input / 2 > bushels) {
@@ -117,14 +124,40 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
             } else if (input > population * 10) {
                 System.out.println("Senpai! You only have " + population + " people to tend the fields!");
             }
-            while (input > acresLand || input / 2 > bushels || input > population * 10) ;
-        bushelWheat -= input/2;
-        bushelPerAcre = (int) (Math.random() * 5 + 1);
-        bushelHarvest = input * bushelPerAcre;
-        input = (int)(Math.random()* 5 + 1);
-
-
-
-
+        } while (input > acresLand || input / 2 > bushels || input > population * 10);
+//        bushelWheat -= input / 2;
+//        bushelPerAcre = (int) (Math.random() * 5 + 1);
+//        bushelHarvest = input * bushelPerAcre;
+//        input = (int) (Math.random() * 5 + 1);
+        return input;
     }
+    public int plagueDeaths(int population) {
+        int deaths = 0;
+        if (rand.nextInt(100) < 15) {
+            deaths = population/2;
+        } return deaths;
+    }
+    public int starvationDeaths(int population, int bushelsFedToPeople) {
+        if (bushelsFedToPeople / 20 > population) {
+            return 0;
+        } else {
+            return population - bushelsFedToPeople / 20;
+        }
+    }
+    public boolean uprising(int population, int howManyPeopleStarved){
+        if ()
+    }
+//    public int immigrants(int population, int acresOwned, int grainInStorage){
+//
+//    }
+//    public int harvest(int acresPlanted){
+//
+//    }
+//    public int grainEatenByRats(int bushels){
+//
+//    }
+//    public int newCostOfLand(){
+//
+//    }
+
 }
