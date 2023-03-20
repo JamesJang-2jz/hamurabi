@@ -3,8 +3,8 @@ import java.nio.file.LinkPermission;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
-public class Hammurabi {         // must save in a file named Hammurabi.java
-    Random rand = new Random();  // this is an instance variable
+public class Hammurabi {
+    Random rand = new Random();
     Scanner scanner = new Scanner(System.in);
     int year = 0;
     int people = 95;
@@ -17,10 +17,9 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     int landPrice = 19;
     int bushelHarvest = 3000;
     static int bushelDestroyed = 200;
-    int cityLand = 1000;
     int bushelPerAcre = 3;
-    static boolean plague = false;
-    static boolean ratInfestation = false;
+    boolean plague = false;
+    boolean ratInfestation = false;
 
     public static void main(String[] args) {
         new Hammurabi().playGame();
@@ -29,7 +28,6 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     void playGame() {
         people += peopleNew;
         bushelWheat = bushelHarvest - bushelDestroyed;
-        landPrice = (int) (Math.random() * 10 + 17);
         acresLand = bushelHarvest / bushelPerAcre;
         while (year < 10) {
             year++;
@@ -50,23 +48,33 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
             int acresToPlant = askHowManyAcresToPlant(acresLand, people, bushelWheat);
                 bushelWheat -= acresToPlant / 2;
             numPlagueDeaths = plagueDeaths(people);
+            if (plague) {
+                System.out.println("Plague has struck the land. Number of deaths: " + numPlagueDeaths);
+            } else {
+                System.out.println("Your land has been spared from plague, enjoy");
+            }
             people -= numPlagueDeaths;
-            int numberStarvationDeaths = starvationDeaths(people, peopleFull);
-            peopleStarved = numberStarvationDeaths;
-            if (uprising(people, numberStarvationDeaths)) {
+            peopleStarved = starvationDeaths(people, grainToFeed);
+            if (uprising(people, peopleStarved)) {
+                System.out.println("There was an uprising!");
                 System.out.println("Senpai Settler, we banish you. Be Gone! RIP Harambe");
                 break;
             }
-            if (numberStarvationDeaths == 0){
+            people -= peopleStarved;
+            if (peopleStarved == 0){
                 peopleNew = immigrants(people, acresLand, bushelWheat);
             } else {
                 peopleNew = 0;
             }
+                people += peopleNew;
             bushelHarvest = harvest(acresToPlant);
+            bushelDestroyed = grainEatenByRats(bushelWheat);
             landPrice = newCostOfLand();
             printSummary();
         }
-        finalSumary();
+        if (year == 10) {
+            finalSumary();
+        }
     }
     int getNumber(String message) {
         while (true) {
@@ -86,7 +94,7 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                 + "The population is now " + people + ".\n" + "We harvested " + bushelHarvest +
                 " bushels at " + bushelPerAcre + " bushels per acre.\n" + "Rats destroyed " +
                 bushelDestroyed + " bushels, leaving " + bushelWheat + " bushels in storage.\n" +
-                "The city owns " + cityLand + " acres of land.\n" + "Land is currently worth " +
+                "The city owns " + acresLand + " acres of land.\n" + "Land is currently worth " +
                 landPrice + " bushels per acre. \n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
     public int askHowManyAcresToBuy(int price, int bushels) {
@@ -127,7 +135,6 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
             input = getNumber("Current inventory: " + bushels + ". Population: " + people);
             if (input > bushels) {
                 System.out.println("Thou not have enough bushels!");
-                askHowMuchGrainToFeedPeople(bushelWheat);
             } else if (input < 0)
                 System.out.println("Please don't be so negative");
         } while (input > bushels);
@@ -135,9 +142,9 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
     }
     public int askHowManyAcresToPlant(int acresLand, int population, int bushels) {
         int input;
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \nSenpai! how many acres do you wish to sow with seed?");
+        System.out.println("People fed: " + peopleFull + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \nSenpai! how many acres do you wish to sow with seed?");
         do {
-            input = getNumber("Current inventory: " + acresLand + "");
+            input = getNumber("Current acres owned: " + acresLand + " Current bushels: " + bushelWheat);
             if (input > acresLand) {
                 System.out.println("You only have " + acresLand + " acres!");
             } else if (input / 2 > bushels) {
@@ -153,10 +160,11 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
         if (rand.nextInt(100) < 15) {
             deaths = population/2;
             plague = true;
-        } return deaths;
+            return deaths;
+        } return 0;
     }
     public int starvationDeaths(int population, int bushelsFedToPeople) {
-        if (bushelsFedToPeople / 20 > population) {
+        if (bushelsFedToPeople / 20 >= population) {
             return 0;
         } else {
             return population - bushelsFedToPeople / 20;
@@ -191,9 +199,12 @@ public class Hammurabi {         // must save in a file named Hammurabi.java
                             "Number of deaths: " + numPlagueDeaths);
                 }
         System.out.println("Number of people starved to death: " + peopleStarved + "\n");
+        System.out.println("Grain eaten by rats " + bushelDestroyed);
     }
     public void finalSumary(){
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + );
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "Senpai Settler! You have won the game. In your 10 years of Rule, " +
+                "you helped " + people + " live a prosperous life in the Harambe kingdom.\n" +
+                "Please don't play this game again I beg of you. FPS games preferred");
     }
 
 }
